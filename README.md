@@ -159,5 +159,74 @@ CREATE TABLE Users (
 
 
 ```
-
 src: Udemy PCA exam commands for self-reference
+
+### Gemini CLI as a SRE to assist VM issues 
+
+Prompt:1 - CPU bottlenecks
+```
+Check current CPU utilization and average load on this VM. Compare results for thresholds:
+CPU >80% for 5 minutes then consider it asWarning
+CPU >90% for 1 minute then consider it as Critical
+List top 5 processes by CPU usage and suggest actions if thresholds are breached.
+```
+
+Prompt:2 - Memory
+```
+Analyze memory usage on this VM and report the following
+Total, used, free memory
+Swap usage
+Compare against thresholds:
+Free memory <10% or Swap >20% then warning
+Swap >50% then critical
+Identify top 5 processes by memory usage and suggest fixes if thresholds exceeded.
+```
+
+Prompt:3 - Disk space and IO
+```
+Check disk usage for all mount points and I/O performance and report:
+Disk usage percentage
+IOPS and latency
+Alert if
+Disk usage >80% then warning
+Disk usage >90% then critical
+Latency >20ms then performance issue
+Suggest cleanup or resizing if thresholds breached.
+```
+
+Prompt:4 Network latency and connectivity
+
+```
+Diagnose network health and report:
+Basic connectivity to internet
+Packet loss percentage on VM
+Bandwidth usage per interface
+Alert if
+Latency >100ms then warning
+Packet loss >1% then critical
+Suggest firewall/VPC fixes or bandwidth optimization if thresholds exceeded.
+```
+
+Prompt:5 Critical SSHD service & Limits
+
+```
+Verify SSHD service. Check ulimit for file descriptors.
+Alert if
+SSHD active/inactive
+ulimit for high-load apps 
+Provide steps to restart services or increase limits if needed.
+```
+
+Prompt: 6 Misc process
+
+```
+Perform additional health checks:
+Detect zombie processes and report count
+Scan kernel logs for hardware errors
+Check failed SSH login attempts in /var/log/auth.log
+Report current open file descriptors count
+Show load average trends for last 15 minutes
+Highlight any anomalies and suggest remediation.
+```
+
+src: https://medium.com/google-cloud/ai-powered-sre-assistant-for-vms-with-gemini-cli-3256b5764dd0
